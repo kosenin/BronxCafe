@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Backendless.initApp(getApplicationContext(), APPLICATIONID, ANDROIDAPIKEY);
+        BackendlessData.BackendlessInit(getApplicationContext());
 
 
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
