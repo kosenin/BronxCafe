@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -20,11 +21,17 @@ import static com.kosenin.boston.bronxcafe.BackendlessSettings.APPLICATIONID;
 
 public class BackendlessData extends AsyncTask {
 
-    List<Food> foodList = new ArrayList<>();
+    List<Food> foodList;
 
-    public static final String TYPE_ROLL = "type = 'roll'";
-    public static final String TYPE_SANDWICH = "type = 'sandwich'";
-    public static final String TYPE_DRINK = "type = 'drink'";
+
+    private static String TYPE;
+
+    public static void setType(String type)
+    {
+        TYPE = type;
+    }
+
+
 
 
     public static void BackendlessInit(Context context) {
@@ -36,10 +43,10 @@ public class BackendlessData extends AsyncTask {
 
 
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
-        queryBuilder.setWhereClause(TYPE_ROLL);
+        queryBuilder.setWhereClause(TYPE);
 
         foodList = Backendless.Data.of(Food.class).find(queryBuilder);
-      //  Log.e("BackendlessAsync", String.valueOf(foodList.size()));
+
 
         return foodList;
     }
