@@ -1,6 +1,9 @@
 package com.kosenin.boston.bronxcafe;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -59,6 +62,36 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        FoodHelper foodHelper = new FoodHelper(this);
+        SQLiteDatabase db = foodHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(Food.COLUMN_DESCRIPTION, "Охуенный сандвич");
+        values.put(Food.COLUMN_NAME, "Cold Fusion");
+        values.put(Food.COLUMN_PRICE, "120");
+        values.put(Food.COLUMN_PICTURE, "No picture yet");
+        values.put(Food.COLUMN_TYPE, "sandwich");
+
+        Log.e("DB", String.valueOf(db.getVersion()));
+
+
+   /*     db.insert(Food.TABLE, null, values);
+
+
+     Cursor cursor = db.query(Food.TABLE, null, null, null, null, null, null);
+
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                String title = cursor.getString(cursor
+                        .getColumnIndexOrThrow(Food.COLUMN_NAME));
+                Log.i("DB", title);
+            }
+            cursor.close();
+        }
+
+*/
 
 
     }
