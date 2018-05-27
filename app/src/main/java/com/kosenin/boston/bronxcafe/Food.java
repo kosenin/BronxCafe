@@ -15,6 +15,7 @@ public class Food {
     public static final String COLUMN_PICTURE = "picture";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_UPDATED = "updated";
 
     private String objectId;
     private String type;

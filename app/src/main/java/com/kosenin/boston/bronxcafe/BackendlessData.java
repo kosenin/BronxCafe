@@ -19,26 +19,23 @@ import static com.kosenin.boston.bronxcafe.BackendlessSettings.ANDROIDAPIKEY;
 import static com.kosenin.boston.bronxcafe.BackendlessSettings.APPLICATIONID;
 
 
-public class BackendlessData extends AsyncTask {
+public class BackendlessData extends AsyncTask<List, Void, List> {
 
     List<Food> foodList;
 
 
     private static String TYPE;
 
-    public static void setType(String type)
-    {
+    public static void setType(String type) {
         TYPE = type;
     }
-
-
 
 
     public static void BackendlessInit(Context context) {
         Backendless.initApp(context, APPLICATIONID, ANDROIDAPIKEY);
     }
 
-    @Override
+    /*@Override
     protected List<Food> doInBackground(Object[] objects) {
 
 
@@ -50,8 +47,19 @@ public class BackendlessData extends AsyncTask {
 
         return foodList;
     }
+*/
 
+    @Override
+    protected List doInBackground(List... lists) {
 
+    //    DataQueryBuilder queryBuilder = DataQueryBuilder.create();
+     //   queryBuilder.setWhereClause(TYPE);
+
+//        foodList = Backendless.Data.of(Food.class).find(queryBuilder);
+
+        foodList = Backendless.Data.of(Food.class).find();
+        return foodList;
+    }
 }
 
 

@@ -30,6 +30,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     }
 
 
+
     public class FoodViewHolder extends RecyclerView.ViewHolder {
 
 
