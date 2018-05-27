@@ -45,11 +45,12 @@ public class DateRepo {
 
 
         for (int i = 0; i < foodDataList.size(); i++) {
-            db.insert(Food.TABLE, null, convertDataToContentValues(foodDataList.get(i).getName(), foodDataList.get(i).getDescription(), foodDataList.get(i).getType(), foodDataList.get(i).getPicture(), String.valueOf(foodDataList.get(i).getPrice()), String.valueOf(foodDataList.get(i).getUpdated())));
+            ContentValues contentValues = convertDataToContentValues(foodDataList.get(i).getName(), foodDataList.get(i).getDescription(), foodDataList.get(i).getType(), foodDataList.get(i).getPicture(), String.valueOf(foodDataList.get(i).getPrice()));
+            db.insert(Food.TABLE, null, contentValues);
 
         }
 
-        db.close();
+        //db.close();
 
         Cursor cursor = db.query(Food.TABLE, null, null, null, null, null, null);
 
@@ -65,7 +66,7 @@ public class DateRepo {
     }
 
 
-    public ContentValues convertDataToContentValues(String name, String description, String type, String picture, String price, String updated) {
+    public ContentValues convertDataToContentValues(String name, String description, String type, String picture, String price) {
 
         ContentValues values = new ContentValues();
         values.put(Food.COLUMN_DESCRIPTION, description);
@@ -73,8 +74,6 @@ public class DateRepo {
         values.put(Food.COLUMN_PRICE, price);
         values.put(Food.COLUMN_PICTURE, picture);
         values.put(Food.COLUMN_TYPE, type);
-        values.put(Food.COLUMN_UPDATED, updated);
-
 
         return values;
     }
