@@ -9,7 +9,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.backendless.Backendless;
+import com.backendless.persistence.BackendlessDataQuery;
 import com.backendless.persistence.DataQueryBuilder;
+import com.backendless.persistence.QueryOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,29 +37,17 @@ public class BackendlessData extends AsyncTask<List, Void, List> {
         Backendless.initApp(context, APPLICATIONID, ANDROIDAPIKEY);
     }
 
-    /*@Override
-    protected List<Food> doInBackground(Object[] objects) {
-
-
-        DataQueryBuilder queryBuilder = DataQueryBuilder.create();
-        queryBuilder.setWhereClause(TYPE);
-
-        foodList = Backendless.Data.of(Food.class).find(queryBuilder);
-
-
-        return foodList;
-    }
-*/
 
     @Override
     protected List doInBackground(List... lists) {
 
-    //    DataQueryBuilder queryBuilder = DataQueryBuilder.create();
-     //   queryBuilder.setWhereClause(TYPE);
+        DataQueryBuilder queryBuilder = DataQueryBuilder.create();
 
-//        foodList = Backendless.Data.of(Food.class).find(queryBuilder);
 
-        foodList = Backendless.Data.of(Food.class).find();
+        queryBuilder.setWhereClause(TYPE).setPageSize(22);
+
+        foodList = Backendless.Data.of(Food.class).find(queryBuilder);
+
         return foodList;
     }
 }

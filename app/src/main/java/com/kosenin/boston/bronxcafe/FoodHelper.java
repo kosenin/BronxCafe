@@ -11,7 +11,7 @@ public class FoodHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
 
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + Food.TABLE + " (_id integer primary key autoincrement,"
-            + " name text," + " price text," + " description text," + " type text," + "picture text," + "udpated text)";
+            + " name text," + " price text," + " description text," + " type text," + "picture text," + "created text)";
 
     public FoodHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);

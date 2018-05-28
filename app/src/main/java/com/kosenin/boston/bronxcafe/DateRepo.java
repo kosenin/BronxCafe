@@ -7,9 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+
+import javax.security.auth.login.LoginException;
 
 import static com.kosenin.boston.bronxcafe.FoodHelper.DB_PATH;
 
@@ -33,8 +37,6 @@ public class DateRepo {
         FoodHelper foodHelper = new FoodHelper(mContext);
         SQLiteDatabase db = foodHelper.getWritableDatabase();
 
-        BackendlessData.setType("roll");
-
         try {
             foodDataList = (List) new BackendlessData().execute().get();
         } catch (InterruptedException e) {
@@ -45,12 +47,18 @@ public class DateRepo {
 
 
         for (int i = 0; i < foodDataList.size(); i++) {
-            ContentValues contentValues = convertDataToContentValues(foodDataList.get(i).getName(), foodDataList.get(i).getDescription(), foodDataList.get(i).getType(), foodDataList.get(i).getPicture(), String.valueOf(foodDataList.get(i).getPrice()));
-            db.insert(Food.TABLE, null, contentValues);
+
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            String created = formatter.format(foodDataList.get(i).getCreated());
+            Log.e("DB_upd", "getDataToRepresent: " + created);
+
+
+            ContentValues contentValues = convertDataToContentValues(foodDataList.get(i).getName(), foodDataList.get(i).getDescription(), foodDataList.get(i).getType(), foodDataList.get(i).getPicture(), String.valueOf(foodDataList.get(i).getPrice()), created);
+            db.insertWithOnConflict(Food.TABLE, null, contentValues, SQLiteDatabase.CONFLICT_REPLACE);
+
 
         }
 
-        //db.close();
 
         Cursor cursor = db.query(Food.TABLE, null, null, null, null, null, null);
 
@@ -66,7 +74,7 @@ public class DateRepo {
     }
 
 
-    public ContentValues convertDataToContentValues(String name, String description, String type, String picture, String price) {
+    public ContentValues convertDataToContentValues(String name, String description, String type, String picture, String price, String created) {
 
         ContentValues values = new ContentValues();
         values.put(Food.COLUMN_DESCRIPTION, description);
@@ -74,6 +82,7 @@ public class DateRepo {
         values.put(Food.COLUMN_PRICE, price);
         values.put(Food.COLUMN_PICTURE, picture);
         values.put(Food.COLUMN_TYPE, type);
+        values.put(Food.COLUMN_CREATED, created);
 
         return values;
     }
