@@ -23,7 +23,7 @@ public class SandwichActivity extends AppCompatActivity {
         //BackendlessData.setType(TYPE);
 
         FoodAdapter foodAdapterSandwich = new FoodAdapter();
-        foodAdapterSandwich.setFOODTYPE(FOODTYPE);
+       // foodAdapterSandwich.setFOODTYPE(FOODTYPE);
 
 
 

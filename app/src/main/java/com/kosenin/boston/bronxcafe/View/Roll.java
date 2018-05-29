@@ -23,7 +23,7 @@ public class Roll extends AppCompatActivity {
       //  BackendlessData.setType(TYPE);
 
         FoodAdapter foodAdapterRoll = new FoodAdapter();
-        foodAdapterRoll.setFOODTYPE(FOODTYPE);
+      //  foodAdapterRoll.setFOODTYPE(FOODTYPE);
 
         RecyclerView foodRecyclerView = findViewById(R.id.roll_recycler_view);
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(this));
