@@ -1,34 +1,43 @@
-package com.kosenin.boston.bronxcafe;
+package com.kosenin.boston.bronxcafe.Presenter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.backendless.Backendless;
+import com.kosenin.boston.bronxcafe.Model.BackendlessData;
+import com.kosenin.boston.bronxcafe.Model.Food;
+import com.kosenin.boston.bronxcafe.R;
+import com.orm.query.Condition;
+import com.orm.query.Select;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
+    private static String FOODTYPE;
 
-    private List<Food> foodDataList;
 
-    {
-        try {
-            foodDataList = (List) new BackendlessData().execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+    public void setFOODTYPE(String foodtype) {
+        FOODTYPE = foodtype;
+
     }
 
+
+    public List getFoodDataList(String FOODTYPE) {
+
+        List<Food> foodDataList = Food.findWithQuery(Food.class, "Select * from Food where type = ?", "sandwich");
+        return foodDataList;
+
+    }
 
 
     public class FoodViewHolder extends RecyclerView.ViewHolder {
@@ -69,12 +78,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     @Override
     public void onBindViewHolder(FoodAdapter.FoodViewHolder holder, int position) {
 
-        holder.bind(foodDataList.get(position));
+        holder.bind((Food) getFoodDataList(FOODTYPE).get(position));
 
     }
 
     @Override
     public int getItemCount() {
-        return foodDataList.size();
+        return getFoodDataList(FOODTYPE).size();
     }
 }

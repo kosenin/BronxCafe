@@ -1,38 +1,20 @@
-package com.kosenin.boston.bronxcafe;
+package com.kosenin.boston.bronxcafe.View;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.backendless.Backendless;
-import com.backendless.async.callback.AsyncCallback;
-import com.backendless.exceptions.BackendlessFault;
-import com.backendless.persistence.BackendlessDataQuery;
-import com.backendless.persistence.DataQueryBuilder;
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
-import static com.kosenin.boston.bronxcafe.BackendlessSettings.ANDROIDAPIKEY;
-import static com.kosenin.boston.bronxcafe.BackendlessSettings.APPLICATIONID;
+import com.kosenin.boston.bronxcafe.Model.BackendlessData;
+import com.kosenin.boston.bronxcafe.Model.DateRepo;
+import com.kosenin.boston.bronxcafe.R;
 
 public class MainActivity extends AppCompatActivity {
 
     DateRepo dataRepository;
-
     Context mContext;
 
 
@@ -43,15 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
 
-
-
         BackendlessData.BackendlessInit(getApplicationContext());
 
-        dataRepository = new  DateRepo();
+        dataRepository = new DateRepo();
         dataRepository.setContext(mContext);
         dataRepository.getDataToRepresent();
 
-        Log.e("DB ex", String.valueOf(DateRepo.databaseExist()));
+        Log.e("DB ex", String.valueOf(DateRepo.doesDatabaseExist(this, "food.db")));
 
         Button sandwichesButton = findViewById(R.id.sandwiches_button);
         Button rollButton = findViewById(R.id.roll_button);

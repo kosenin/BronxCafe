@@ -1,4 +1,4 @@
-package com.kosenin.boston.bronxcafe;
+package com.kosenin.boston.bronxcafe.Model;
 
 
 

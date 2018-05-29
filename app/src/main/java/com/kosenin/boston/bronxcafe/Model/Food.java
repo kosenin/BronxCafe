@@ -1,38 +1,45 @@
-package com.kosenin.boston.bronxcafe;
+package com.kosenin.boston.bronxcafe.Model;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.persistence.DataQueryBuilder;
+import com.orm.SugarRecord;
 
+import java.util.Date;
 import java.util.List;
 
-public class Food {
+public class Food extends SugarRecord<Food> {
 
 
-    public static final String TABLE = "food";
-    public static final String COLUMN_TYPE = "type";
-    public static final String COLUMN_PRICE = "price";
-    public static final String COLUMN_PICTURE = "picture";
-    public static final String COLUMN_NAME = "name";
-    public static final String COLUMN_DESCRIPTION = "description";
-    public static final String COLUMN_UPDATED = "updated";
-    public static final String COLUMN_CREATED = "created";
 
 
-    private String objectId;
     private String type;
-    private String ownerId;
-    private java.util.Date updated;
     private Integer price;
     private String picture;
     private String name;
     private String description;
     private java.util.Date created;
 
-    public String getObjectId() {
-        return objectId;
+    public Food() {
+
     }
 
+    public Food(String type, int price, String picture, String name, String description, Date created) {
+        this.created = created;
+        this.description = description;
+        this.type = type;
+        this.price = price;
+        this.picture = picture;
+        this.name = name;
+
+
+    }
+
+
+    /*  public String getObjectId() {
+          return objectId;
+      }
+  */
     public String getType() {
         return type;
     }
@@ -41,14 +48,14 @@ public class Food {
         this.type = type;
     }
 
-    public String getOwnerId() {
+    /* public String getOwnerId() {
         return ownerId;
-    }
+    } */
 
-    public java.util.Date getUpdated() {
-        return updated;
-    }
-
+    /*  public java.util.Date getUpdated() {
+          return updated;
+      }
+  */
     public Integer getPrice() {
         return price;
     }
@@ -85,10 +92,6 @@ public class Food {
         return created;
     }
 
-
-    public Food save() {
-        return Backendless.Data.of(Food.class).save(this);
-    }
 
     public void saveAsync(AsyncCallback<Food> callback) {
         Backendless.Data.of(Food.class).save(this, callback);
