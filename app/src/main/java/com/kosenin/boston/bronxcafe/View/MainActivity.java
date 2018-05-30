@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         dataRepository = new DateRepo();
         dataRepository.setContext(mContext);
-        dataRepository.getDataToRepresent();
+        dataRepository.cacheData();
 
         Log.e("DB ex", String.valueOf(DateRepo.doesDatabaseExist(this, "food.db")));
 

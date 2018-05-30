@@ -9,23 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.backendless.Backendless;
-import com.kosenin.boston.bronxcafe.Model.BackendlessData;
 import com.kosenin.boston.bronxcafe.Model.Food;
 import com.kosenin.boston.bronxcafe.R;
-import com.orm.query.Condition;
-import com.orm.query.Select;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
 
     List<Food> foodDataList = new ArrayList<>();
-    Context mContext;
 
     public FoodAdapter(String foodtype) {
         this.foodDataList = Food.findWithQuery(Food.class, "Select * from Food where type = ?", foodtype);

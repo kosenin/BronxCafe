@@ -6,8 +6,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <application
 
+    <application
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.MainActivity">
+        <activity android:name=".View.login_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".View.SandwichActivity" />
-        <activity android:name=".View.Roll"></activity>
+        <activity android:name=".View.Roll" />
+        <activity android:name=".View.MainActivity"></activity>
 
         <meta-data
             android:name="DATABASE"
@@ -37,6 +38,7 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.kosenin" />
+
 
     </application>
 

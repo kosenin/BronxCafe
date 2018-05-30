@@ -17,15 +17,6 @@ public class BackendlessData extends AsyncTask<List, Void, List> {
     List<Food> foodList;
 
 
-
-
-    private static String TYPE;
-
-    public static void setType(String type) {
-        TYPE = type;
-    }
-
-
     public static void BackendlessInit(Context context) {
         Backendless.initApp(context, APPLICATIONID, ANDROIDAPIKEY);
     }
@@ -36,7 +27,7 @@ public class BackendlessData extends AsyncTask<List, Void, List> {
 
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
 
-        queryBuilder.setWhereClause(TYPE).setPageSize(22);
+        queryBuilder.setPageSize(22);
 
         foodList = Backendless.Data.of(Food.class).find(queryBuilder);
 

@@ -3,6 +3,11 @@ package com.kosenin.boston.bronxcafe.Model;
 import android.content.Context;
 
 
+import com.backendless.Backendless;
+import com.backendless.persistence.BackendlessDataQuery;
+import com.backendless.persistence.DataQueryBuilder;
+import com.orm.QueryBuilder;
+
 import java.io.File;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +27,8 @@ public class DateRepo {
     List<Food> foodDataList;
 
 
-    public void getDataToRepresent() {
+
+    public void cacheData() {
 
         BackendlessData.BackendlessInit(mContext);
 
