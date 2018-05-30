@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, Roll.class);
-                intent.putExtra("TypeRoll", "type = 'roll'");
+                intent.putExtra("TypeRoll", "roll");
                 startActivity(intent);
 
             }
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SandwichActivity.class);
-                intent.putExtra("TypeSandwich", "type = 'sandwich'");
+                intent.putExtra("TypeSandwich", "sandwich");
                 startActivity(intent);
 
             }

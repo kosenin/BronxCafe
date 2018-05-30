@@ -23,20 +23,12 @@ import java.util.concurrent.ExecutionException;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
-    private static String FOODTYPE = "sandwich";
 
+    List<Food> foodDataList = new ArrayList<>();
+    Context mContext;
 
-    //TODO FUCK THIS ADAPTER
-
-   /* public void setFOODTYPE(String foodtype) {
-        FOODTYPE = foodtype;
-
-    }
-*/
-
-    public List getFoodDataList() {
-
-        return Food.findWithQuery(Food.class, "Select * from Food where type = ?", FOODTYPE);
+    public FoodAdapter(String foodtype) {
+        this.foodDataList = Food.findWithQuery(Food.class, "Select * from Food where type = ?", foodtype);
 
     }
 
@@ -79,12 +71,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     @Override
     public void onBindViewHolder(FoodAdapter.FoodViewHolder holder, int position) {
 
-        holder.bind((Food) getFoodDataList().get(position));
+        holder.bind(foodDataList.get(position));
 
     }
 
     @Override
     public int getItemCount() {
-        return getFoodDataList().size();
+        return foodDataList.size();
     }
 }

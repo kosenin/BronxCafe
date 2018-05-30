@@ -7,8 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.kosenin.boston.bronxcafe.Model.BackendlessData;
+import com.kosenin.boston.bronxcafe.Model.Food;
 import com.kosenin.boston.bronxcafe.Presenter.FoodAdapter;
 import com.kosenin.boston.bronxcafe.R;
+
+import java.util.List;
 
 public class Roll extends AppCompatActivity {
 
@@ -20,14 +23,13 @@ public class Roll extends AppCompatActivity {
         Intent intent = getIntent();
         String FOODTYPE = intent.getStringExtra("TypeRoll");
 
-      //  BackendlessData.setType(TYPE);
 
-        FoodAdapter foodAdapterRoll = new FoodAdapter();
-      //  foodAdapterRoll.setFOODTYPE(FOODTYPE);
+        FoodAdapter foodAdapterRoll = new FoodAdapter(FOODTYPE);
 
         RecyclerView foodRecyclerView = findViewById(R.id.roll_recycler_view);
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         foodRecyclerView.setAdapter(foodAdapterRoll);
+        foodAdapterRoll.notifyDataSetChanged();
     }
 }
