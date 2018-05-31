@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 
 import com.kosenin.boston.bronxcafe.Model.BackendlessData;
 import com.kosenin.boston.bronxcafe.Model.Food;
@@ -29,6 +30,23 @@ public class SandwichActivity extends AppCompatActivity {
 
         RecyclerView foodRecyclerView = findViewById(R.id.sandwich_recycler_view);
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        foodRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
 
         foodRecyclerView.setAdapter(foodAdapterSandwich);
         foodAdapterSandwich.notifyDataSetChanged();

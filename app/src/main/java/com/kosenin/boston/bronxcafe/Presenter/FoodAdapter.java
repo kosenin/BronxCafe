@@ -1,13 +1,14 @@
 package com.kosenin.boston.bronxcafe.Presenter;
 
-import android.content.Context;
+
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kosenin.boston.bronxcafe.Model.Food;
 import com.kosenin.boston.bronxcafe.R;
@@ -19,7 +20,7 @@ import java.util.List;
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
 
-    List<Food> foodDataList = new ArrayList<>();
+    List<Food> foodDataList;
 
     public FoodAdapter(String foodtype) {
         this.foodDataList = Food.findWithQuery(Food.class, "Select * from Food where type = ?", foodtype);
@@ -34,6 +35,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         private TextView name;
         private TextView description;
         private TextView price;
+        private ArrayList<Food> orderedItems;
+
+
 
         public FoodViewHolder(View itemView) {
             super(itemView);
@@ -41,6 +45,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             name = itemView.findViewById(R.id.name);
             description = itemView.findViewById(R.id.description);
             price = itemView.findViewById(R.id.price);
+
         }
 
         public void bind(Food food) {
@@ -59,6 +64,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item, parent, false);
 
+
+
         return new FoodViewHolder(view);
     }
 
@@ -66,6 +73,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public void onBindViewHolder(FoodAdapter.FoodViewHolder holder, int position) {
 
         holder.bind(foodDataList.get(position));
+
+
 
     }
 
