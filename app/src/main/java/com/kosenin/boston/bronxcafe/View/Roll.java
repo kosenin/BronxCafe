@@ -11,10 +11,11 @@ import com.kosenin.boston.bronxcafe.Model.Food;
 import com.kosenin.boston.bronxcafe.Presenter.FoodAdapter;
 import com.kosenin.boston.bronxcafe.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Roll extends AppCompatActivity {
-
+    private List<Food> orderedItems;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +24,8 @@ public class Roll extends AppCompatActivity {
         Intent intent = getIntent();
         String FOODTYPE = intent.getStringExtra("TypeRoll");
 
-
-        FoodAdapter foodAdapterRoll = new FoodAdapter(FOODTYPE);
+        orderedItems = new ArrayList<>();
+        FoodAdapter foodAdapterRoll = new FoodAdapter(FOODTYPE, orderedItems);
 
         RecyclerView foodRecyclerView = findViewById(R.id.roll_recycler_view);
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(this));

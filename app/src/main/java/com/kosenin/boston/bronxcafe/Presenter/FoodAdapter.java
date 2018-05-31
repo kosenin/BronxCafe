@@ -3,6 +3,7 @@ package com.kosenin.boston.bronxcafe.Presenter;
 
 import android.support.v7.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,14 @@ import java.util.List;
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
 
-    List<Food> foodDataList;
+    private List<Food> foodDataList;
+    private List<Food> orderedItems;
 
-    public FoodAdapter(String foodtype) {
+
+    public FoodAdapter(String foodtype, List<Food> orderedItems) {
         this.foodDataList = Food.findWithQuery(Food.class, "Select * from Food where type = ?", foodtype);
+        this.orderedItems = orderedItems;
+
 
     }
 
@@ -35,8 +40,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         private TextView name;
         private TextView description;
         private TextView price;
-        private ArrayList<Food> orderedItems;
-
 
 
         public FoodViewHolder(View itemView) {
@@ -65,15 +68,23 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                 .inflate(R.layout.list_item, parent, false);
 
 
-
         return new FoodViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(FoodAdapter.FoodViewHolder holder, int position) {
+    public void onBindViewHolder(FoodAdapter.FoodViewHolder holder, final int position) {
 
         holder.bind(foodDataList.get(position));
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                orderedItems.add(foodDataList.get(position));
+                Log.e("order", String.valueOf(orderedItems.size()));
+
+            }
+        });
 
 
     }

@@ -12,11 +12,12 @@ import com.kosenin.boston.bronxcafe.Model.Food;
 import com.kosenin.boston.bronxcafe.Presenter.FoodAdapter;
 import com.kosenin.boston.bronxcafe.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SandwichActivity extends AppCompatActivity {
-    private List<Food> foodList;
 
+    private List<Food> orderedItems;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,29 +25,15 @@ public class SandwichActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String FOODTYPE = intent.getStringExtra("TypeSandwich");
+         orderedItems = new ArrayList<>();
 
-        FoodAdapter foodAdapterSandwich = new FoodAdapter(FOODTYPE);
+        FoodAdapter foodAdapterSandwich = new FoodAdapter(FOODTYPE, orderedItems);
 
 
         RecyclerView foodRecyclerView = findViewById(R.id.sandwich_recycler_view);
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        foodRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                return false;
-            }
 
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
 
         foodRecyclerView.setAdapter(foodAdapterSandwich);
         foodAdapterSandwich.notifyDataSetChanged();
