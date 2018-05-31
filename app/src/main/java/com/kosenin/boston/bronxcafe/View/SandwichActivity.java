@@ -30,10 +30,29 @@ public class SandwichActivity extends AppCompatActivity {
         FoodAdapter foodAdapterSandwich = new FoodAdapter(FOODTYPE, orderedItems);
 
 
+
+
         RecyclerView foodRecyclerView = findViewById(R.id.sandwich_recycler_view);
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        //TODO Do here implementation of OnClick. Look to GitHub
 
+        foodRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
 
         foodRecyclerView.setAdapter(foodAdapterSandwich);
         foodAdapterSandwich.notifyDataSetChanged();
