@@ -11,8 +11,6 @@ import java.util.List;
 public class Food extends SugarRecord<Food> {
 
 
-
-
     private String type;
     private Integer price;
     private String picture;
