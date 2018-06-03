@@ -1,68 +1,49 @@
 package com.kosenin.boston.bronxcafe.Model;
 
 
+import com.orm.SugarRecord;
+
 import java.util.Date;
 
 public class Order {
 
-    private String type;
-    private Integer price;
-    private String picture;
-    private String name;
-    private String description;
-    private java.util.Date created;
+    private long orderNumber;
+    private String userPhone;
+    private String objectID;
+    private Date created;
 
     public Order() {
 
     }
 
-    public Order(String type, Integer price, String picture, String name, String description, Date created) {
-        this.type = type;
-        this.price = price;
-        this.picture = picture;
-        this.name = name;
-        this.description = description;
-        this.created = created;
+    public Order(long orderNumber, String userPhone) {
+        this.orderNumber = orderNumber;
+        this.userPhone = userPhone;
+
     }
 
-    public String getType() {
-        return type;
+    public long getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setOrderNumber(long orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
-    public Integer getPrice() {
-        return price;
+    public String getUserPhone() {
+        return userPhone;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getObjectID() {
+        return objectID;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setObjectID(String objectID) {
+        this.objectID = objectID;
     }
 
     public Date getCreated() {
@@ -72,4 +53,6 @@ public class Order {
     public void setCreated(Date created) {
         this.created = created;
     }
+
+
 }

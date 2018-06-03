@@ -1,17 +1,14 @@
 package com.kosenin.boston.bronxcafe.Model;
 
+import java.util.Date;
+
 public class OrderNumberGenerator {
 
+    static Date date = java.util.Calendar.getInstance().getTime();
 
-
-    private static long orderNumber;
-
-    public static long getOrderNumber() {
-        return orderNumber;
-    }
-
-    public static void setOrderNumber(long orderNumber) {
-        OrderNumberGenerator.orderNumber = orderNumber;
+    public static long orderNumber()
+    {
+        return date.getTime();
     }
 
 }

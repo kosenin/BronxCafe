@@ -12,8 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.backendless.Backendless;
+import com.backendless.BackendlessUser;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.local.UserTokenStorageFactory;
 import com.kosenin.boston.bronxcafe.Model.Food;
 import com.kosenin.boston.bronxcafe.Model.Order;
+import com.kosenin.boston.bronxcafe.Model.OrderNumberGenerator;
+import com.kosenin.boston.bronxcafe.Model.OrderedProducts;
 import com.kosenin.boston.bronxcafe.R;
 import com.squareup.picasso.Picasso;
 
@@ -23,6 +30,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
 
     private List<Food> foodDataList;
+    private Order order;
+    private String userToken;
 
 
     private Context mContext;
@@ -89,7 +98,26 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             @Override
             public void onClick(View v) {
 
-                OrderHelper.setOrders(foodDataList.get(position));
+                userToken = UserTokenStorageFactory.instance().getStorage().get();
+
+                Backendless.UserService.findById(userToken, new AsyncCallback<BackendlessUser>() {
+                    @Override
+                    public void handleResponse(BackendlessUser response) {
+
+                        Order order = new Order(OrderNumberGenerator.orderNumber(), response.getUserId());
+
+                    }
+
+                    @Override
+                    public void handleFault(BackendlessFault fault) {
+
+                    }
+                });
+                OrderedProducts orderedProducts = new OrderedProducts(order, foodDataList.get(position));
+                OrderHelper.setOrders(orderedProducts);
+
+                //OrderHelper.setOrders(foodDataList.get(position));
+
                 Toast toast = Toast.makeText(mContext, "В заказ добавлен: " + foodDataList.get(position).getName(), Toast.LENGTH_SHORT);
                 toast.show();
 

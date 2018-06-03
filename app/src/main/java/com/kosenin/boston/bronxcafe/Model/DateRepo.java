@@ -27,7 +27,6 @@ public class DateRepo {
     List<Food> foodDataList;
 
 
-
     public void cacheData() {
 
         BackendlessData.BackendlessInit(mContext);
@@ -42,14 +41,14 @@ public class DateRepo {
 
         if (!doesDatabaseExist(mContext, "food.db")) {
             for (int i = 0; i < foodDataList.size(); i++) {
-                saveFoodToDatabase(foodDataList.get(i).getType(), foodDataList.get(i).getPrice(), foodDataList.get(i).getPicture(), foodDataList.get(i).getName(), foodDataList.get(i).getDescription(), foodDataList.get(i).getCreated());
+                saveFoodToDatabase(foodDataList.get(i).getType(), foodDataList.get(i).getPrice(), foodDataList.get(i).getPicture(), foodDataList.get(i).getName(), foodDataList.get(i).getDescription(), foodDataList.get(i).getCreated(), foodDataList.get(i).getObjectId());
             }
         }
     }
 
-    private void saveFoodToDatabase(String type, int price, String picture, String name, String description, Date created) {
+    private void saveFoodToDatabase(String type, int price, String picture, String name, String description, Date created, String objectId) {
 
-        Food food = new Food(type, price, picture, name, description, created);
+        Food food = new Food(type, price, picture, name, description, created, objectId);
         food.save();
     }
 

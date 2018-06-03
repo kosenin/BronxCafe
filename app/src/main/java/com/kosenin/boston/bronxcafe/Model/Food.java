@@ -12,17 +12,18 @@ public class Food extends SugarRecord<Food> {
 
 
     private String type;
-    private Integer price;
+    private int price;
     private String picture;
     private String name;
     private String description;
     private java.util.Date created;
+    private String objectId;
 
     public Food() {
 
     }
 
-    public Food(String type, int price, String picture, String name, String description, Date created) {
+    public Food(String type, int price, String picture, String name, String description, Date created, String objectId) {
         this.created = created;
         this.description = description;
         this.type = type;
@@ -33,11 +34,13 @@ public class Food extends SugarRecord<Food> {
 
     }
 
-
-    /*  public String getObjectId() {
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
+   public String getObjectId() {
           return objectId;
       }
-  */
+
     public String getType() {
         return type;
     }
