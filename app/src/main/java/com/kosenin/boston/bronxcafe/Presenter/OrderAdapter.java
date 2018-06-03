@@ -1,49 +1,31 @@
 package com.kosenin.boston.bronxcafe.Presenter;
 
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kosenin.boston.bronxcafe.Model.Food;
-import com.kosenin.boston.bronxcafe.Model.Order;
 import com.kosenin.boston.bronxcafe.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
-
-    private List<Food> foodDataList;
-
-
+    private List<Food> orderedFood = OrderHelper.getOrders();
     private Context mContext;
 
+    public OrderAdapter(Context context) {
 
-    public FoodAdapter() {
-
-    }
-
-
-    public FoodAdapter(List<Food> orderedItems, String foodtype, Context context) {
-
-     //   this.orderedItems = orderedItems;
-        this.foodDataList = Food.findWithQuery(Food.class, "Select * from Food where type = ?", foodtype);
         this.mContext = context;
-
     }
 
 
-    public class FoodViewHolder extends RecyclerView.ViewHolder {
-
+    public class OrderViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView food_image;
         private TextView name;
@@ -51,12 +33,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         private TextView price;
 
 
-        public FoodViewHolder(View itemView) {
+        public OrderViewHolder(View itemView) {
             super(itemView);
+
             food_image = itemView.findViewById(R.id.food_image);
             name = itemView.findViewById(R.id.name);
             description = itemView.findViewById(R.id.description);
             price = itemView.findViewById(R.id.price);
+
 
         }
 
@@ -67,40 +51,33 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             Picasso.get().load(String.valueOf(food.getPicture())).into(food_image);
 
         }
-
     }
 
 
     @Override
-    public FoodAdapter.FoodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public void onBindViewHolder(OrderAdapter.OrderViewHolder holder, int position, List payloads) {
+        super.onBindViewHolder(holder, position, payloads);
+    }
+
+    @Override
+    public OrderAdapter.OrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item, parent, false);
 
-
-        return new FoodViewHolder(view);
+        return new OrderViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(FoodAdapter.FoodViewHolder holder, final int position) {
-
-        holder.bind(foodDataList.get(position));
-
-       holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                OrderHelper.setOrders(foodDataList.get(position));
-                Toast toast = Toast.makeText(mContext, "В заказ добавлен: " + foodDataList.get(position).getName(), Toast.LENGTH_SHORT);
-                toast.show();
-
-            }
-        });
-
-
+    public void onBindViewHolder(OrderAdapter.OrderViewHolder holder, int position) {
+        holder.bind(orderedFood.get(position));
     }
+
+
 
     @Override
     public int getItemCount() {
-        return foodDataList.size();
+        return orderedFood.size();
     }
+
+
 }

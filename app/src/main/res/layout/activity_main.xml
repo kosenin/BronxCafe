@@ -23,6 +23,14 @@
         android:layout_gravity="center"
         android:text="Роллы"
         android:layout_margin="10dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/order_button"
+        android:layout_gravity="center"
+        android:text="Заказанное"
+        android:layout_margin="10dp"/>
 
 
 

@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button sandwichesButton = findViewById(R.id.sandwiches_button);
         Button rollButton = findViewById(R.id.roll_button);
+        Button orderButton = findViewById(R.id.order_button);
 
         rollButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SandwichActivity.class);
                 intent.putExtra("TypeSandwich", "sandwich");
+                startActivity(intent);
+
+            }
+        });
+
+        orderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, OrdersActivity.class);
+
                 startActivity(intent);
 
             }
